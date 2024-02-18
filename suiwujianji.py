@@ -1,4 +1,4 @@
-# code by 千秋紫莹，全平台同名
+# code by 千秋紫莹
 import os
 import random
 import ffmpeg
