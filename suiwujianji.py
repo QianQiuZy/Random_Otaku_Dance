@@ -27,7 +27,7 @@ def seconds_to_minutes(seconds):
     return seconds / 60.0
 
 def export_dance_order(clips, output_file):
-    with open(output_file, 'w') as f:
+    with open(output_file, 'w', encoding='utf-8') as f:
         for clip in clips:
             dance_name = os.path.basename(clip).split()[0]
             f.write(dance_name + '\n')
@@ -72,10 +72,10 @@ def main():
         )
         print(f"剪辑完成，保存为 {output_file}")
         export_dance_order(dance_files, order_file)
-        os.system("pause")
+        print("按任意键退出...")
     except ffmpeg.Error as e:
         print(f"剪辑过程中出现错误: {e.stderr}")
-        os.system("pause")
+        print("按任意键退出...")
 
 if __name__ == "__main__":
     main()
