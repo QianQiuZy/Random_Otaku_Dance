@@ -1,9 +1,18 @@
-# code by 千秋紫莹
+# code by 千秋紫莹，部分代码由ChatGPT Turbo 3.5编写和改进
 # 导入所需的模块和库
 import os
 import random
 import ffmpeg
+import sys
 from concurrent.futures import ThreadPoolExecutor
+
+# 临时增加ffmpeg文件夹到PATH中以便调用
+def add_folder_to_path(folder_name):
+    current_dir = os.path.dirname(os.path.realpath(__file__))
+    target_folder = folder_name
+    folder_path = os.path.join(current_dir, target_folder)
+    if os.path.exists(folder_path):
+        sys.path.append(folder_path)
 
 # 获取指定文件夹中的音频文件列表
 def get_audio_files(folder):
@@ -47,6 +56,9 @@ def suiwujianji():
     countdown_file = '倒计时.mp3'
     output_file = '随舞.mp3'
     order_file = '顺序.txt'
+
+    # 临时增加ffmpeg到PATH中以便调用
+    add_folder_to_path("ffmpeg")
 
     # 获取音频文件列表
     dance_files = get_audio_files(dance_folder)
@@ -98,7 +110,7 @@ def suiwujianji():
             ffmpeg
             .input('concat:' + '|'.join(clips), format='mp3')
             .output(output_file_name, acodec='copy')
-            .run()
+            .run(quiet=True)
         )
         print(f"剪辑完成，保存为 {output_file_name}")
         # 导出舞蹈顺序到文本文件
