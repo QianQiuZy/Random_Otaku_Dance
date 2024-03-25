@@ -3,16 +3,7 @@
 import os
 import random
 import ffmpeg
-import sys
 from concurrent.futures import ThreadPoolExecutor
-
-# 临时增加ffmpeg文件夹到PATH中以便调用
-def add_folder_to_path(folder_name):
-    current_dir = os.path.dirname(os.path.realpath(__file__))
-    target_folder = folder_name
-    folder_path = os.path.join(current_dir, target_folder)
-    if os.path.exists(folder_path):
-        sys.path.append(folder_path)
 
 # 获取指定文件夹中的音频文件列表
 def get_audio_files(folder):
@@ -56,9 +47,6 @@ def suiwujianji():
     countdown_file = '倒计时.mp3'
     output_file = '随舞.mp3'
     order_file = '顺序.txt'
-
-    # 临时增加ffmpeg到PATH中以便调用
-    add_folder_to_path("ffmpeg")
 
     # 获取音频文件列表
     dance_files = get_audio_files(dance_folder)
